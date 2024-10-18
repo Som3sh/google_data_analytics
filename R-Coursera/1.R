@@ -75,7 +75,7 @@ head(bookings_df)
 colnames(bookings_df)
 data <- data_frame(bookings_df)
 attach(data)  
-
+mean(lead_time)
 sum(is_canceled)
 
 #-------------------------------------------------------------------------------
@@ -89,5 +89,31 @@ job_title <- c("Professional", "Programmer", "Management", "Clerical", "Develope
 
 
 employee <- data.frame(id, name, job_title)
-seperate(employee , name , into = c('first_name' , 'last_name'), sep=' ')
+separate(employee , name , into = c('first_name' , 'last_name'), sep=' ')
+#-------------------------------------------------------------------------------
 
+install.packages('Tmisc')
+library(Tmisc)
+
+data("quartet")
+quartet %>% 
+  group_by(set) %>% 
+  summarize(mean(x) , sd(x) , mean(y) , sd(y) , cor(x,y))
+
+install.packages('datasauRus') 
+
+library('datasauRus') 
+
+ggplot(datasaurus_dozen,aes(x=x,y=y,colour=dataset))+geom_point()+theme_void()+theme(legend.position = "none")+facet_wrap(~dataset,ncol=3)  
+
+
+
+ggplot(data = bookings_df) +   
+  
+  geom_bar(mapping = aes(x = distribution_channel)) +   
+  
+  facet_wrap(~deposit_type)
+onlineta_city_hotels_v2 <- bookings_df %>%
+  filter(hotel=="City Hotel") %>%
+  filter(market_segment=="Online TA")
+View(onlineta_city_hotels_v2)
